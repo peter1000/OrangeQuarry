@@ -1,8 +1,6 @@
 using Compose
 using Color
 
-docpage(tile; padding=2em, widthcap=62em) = hbox(pad(4em, tile) |> maxwidth(widthcap), flex())
-
 function sierpinski(n)
     if n == 0
         compose(context(), polygon([(1,1), (0,1), (1/2, 0)]))
@@ -15,8 +13,4 @@ function sierpinski(n)
     end
 end
 
-function main(window)
-    push!(window.assets, "codemirror")
-    
-    compose(sierpinski(6)) |> docpage
-end
+main(window) = compose(sierpinski(6))
