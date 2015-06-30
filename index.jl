@@ -1,41 +1,46 @@
 using Markdown
-using Gadfly
 using Compose
 
+padThing(x) = Escher.pad(2em, x)
 
-fig(x) = pad(1em, x)
+docpage(tile; padding=2em, widthcap=60em) = hbox(Escher.pad(2em, tile) |> maxwidth(widthcap), flex())
 
-docpage(tile; padding=2em, widthcap=62em) =
-              hbox(pad(4em, tile) |> maxwidth(widthcap), flex())
-
-logo = compose(compose(context(), rectangle()), fill("tomato"))
-		  
-tabbar = tabs([
-	hbox(icon("explore"), hskip(1em), "Tab 1"), 
-	hbox(icon("extension"), hskip(1em), "Tab 2"),
-	])
-
-tabcontent = pages([
-	plot([sin, cos], 0, 25),
-	title(3, "web component all the things"),
-	])
-
-t, p = wire(tabbar, tabcontent, :tab_channel, :selected)
-		  
 function main(window)
-    push!(window.assets, "codemirror")
-    md"""
-$(hbox(logo, title(4, "OrangeQuarry")))
-$(vskip(1em))
-Escher provides primitives that directly map to CSS font styling properties, as well as higher-level functions which form a standard typographic scale you can use to give your documents a consistent, pleasant look. By default, Escher uses the [*Source Sans Pro*](http://www.google.com/fonts/specimen/Source+Sans+Pro) (sans-serif) and [*Source Code Pro*](http://www.google.com/fonts/specimen/Source+Code+Pro) (monospaced) font families for great-looking and legible type.
+    
+    mytitle = Escher.title(4, "OrangeQuarry")
+    
+    rec = rectangle()
 
-# What is OrangeQuarry?
-$(vskip(1em))
+    smallblock = compose(context(0, 0, .1, .2), rectangle())
 
-$(vbox(t, p))
 
-    """ |> docpage
+    logo2 = compose(context(),
+            (context(), rec, fill("tomato")
+                ),
+            (context(), circle(), fill("bisque")),)
+
+
+    logo = compose(compose(context(0, 0, .75, 1), rec), fill("tomato"))
+    
+    logo = compose(context(0, 0, .75, 1), rec, fill("tomato"))
+    # mytitle = fillcolor("#a4c2f9", mytitle)
+
+    header = hbox(map(padThing, [logo2, mytitle]))
+    
+    todolist = md"""
+            **Things to do:**
+
+            - Get to do list better formated 
+            - Define layout
+            - Get Icon up
+            - Make a titile
+            - Connect to orangequarry.com
+            - Figure out how to run on web servers
+            - Learn in general
+            """ 
+    
+    all_the_things = vbox([header, todolist])
+    all_the_things |> docpage
+    # logo2
+
 end
-
-
-

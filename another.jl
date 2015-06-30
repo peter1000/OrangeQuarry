@@ -8,7 +8,7 @@ logo = compose(compose(context(), rectangle(0, 0, 2, 2)), fill("tomato"))
 
 fig(x) = pad(1em, x)
 
-docpage(tile; padding=2em, widthcap=62em) = hbox(pad(4em, tile) |> maxwidth(widthcap), flex())
+docpage(tile; padding=2em, widthcap=62em) = hbox(Escher.pad(4em, tile) |> maxwidth(widthcap), flex())
 
 
 function main(window)
@@ -27,14 +27,15 @@ function main(window)
     typeexample(code, output=eval(parse(code))) =
       vbox(
          codemirror(code, readonly=true, linenumbers=false) |> fontcolor("#777"),
-         output |> pad([left], 2em))
+         output |> Escher.pad([left], 2em))
 
-    master = title(4, "Hello")
+    # master = title(4, "Hello")
     titles = vbox(
        intersperse(vskip(2em),
            map(n -> typeexample("title($n, \"Title $n\")"), 4:-1:1)))
-
     logo |> docpage
+    # master |> docpage
+    
 
 
 
