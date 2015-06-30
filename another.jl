@@ -5,6 +5,7 @@ using Compose
 logo = compose(compose(context(), rectangle(0, 0, 2, 2)), fill("tomato"))
 # logo = flex(logo)
 
+master = title(4, "Hello")
 
 fig(x) = pad(1em, x)
 
@@ -29,12 +30,13 @@ function main(window)
          codemirror(code, readonly=true, linenumbers=false) |> fontcolor("#777"),
          output |> Escher.pad([left], 2em))
 
-    # master = title(4, "Hello")
+    
+    
     titles = vbox(
        intersperse(vskip(2em),
            map(n -> typeexample("title($n, \"Title $n\")"), 4:-1:1)))
-    logo |> docpage
-    # master |> docpage
+    # logo |> docpage
+    master |> docpage
     
 
 

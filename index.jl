@@ -8,7 +8,8 @@ docpage(tile; padding=2em, widthcap=60em) = hbox(Escher.pad(2em, tile) |> maxwid
 
 function main(window)
 
-    mytitle = Escher.title(4, "OrangeQuarry")
+    # mytitle = Escher.title(4, "OrangeQuarry")
+    mytitle = title(4, "OrangeQuarry")
     mytitle = vbox(vskip(2em), mytitle)
 
     rec = rectangle()
@@ -41,7 +42,7 @@ function main(window)
 
     all_the_things = vbox([header, todolist, vskip(10em)])
     all_the_things = fillcolor("#FDFBF9", all_the_things)
-    all_the_things
-    # all_the_things |> docpage
+    # all_the_things
+    all_the_things |> docpage
 
 end
