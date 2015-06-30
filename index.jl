@@ -1,31 +1,29 @@
 using Markdown
 using Compose
+using Gadfly
 
 padThing(x) = Escher.pad(2em, x)
 
-docpage(tile; padding=2em, widthcap=60em) = hbox(Escher.pad(2em, tile) |> maxwidth(widthcap), flex())
+docpage(tile; padding=2em, widthcap=60em) = hbox(Escher.pad(2em, tile) |> maxwidth(widthcap), Escher.flex())
 
 function main(window)
-    
+
     mytitle = Escher.title(4, "OrangeQuarry")
-    
+    mytitle = vbox(vskip(2em), mytitle)
+
     rec = rectangle()
 
-    smallblock = compose(context(0, 0, .1, .2), rectangle())
+    logotest = compose( context(),
+            (context(0, 0, .7, .8), rec, fill("tomato")),
+            (context(.2, .2, .3, .4), rec, fill("tomato")),
+            (context(.3, .3, .1, .1), rec, fill("tomato")),
+            (context(.3, .3, .3, .4), rec, fill("tomato"))
+        )
 
-
-    logo2 = compose(context(),
-            (context(), rec, fill("tomato")
-                ),
-            (context(), circle(), fill("bisque")),)
-
-
-    logo = compose(compose(context(0, 0, .75, 1), rec), fill("tomato"))
-    
     logo = compose(context(0, 0, .75, 1), rec, fill("tomato"))
-    # mytitle = fillcolor("#a4c2f9", mytitle)
+    logo = padThing(logo)
 
-    header = hbox(map(padThing, [logo2, mytitle]))
+    header = hbox([logo, hskip(1em), mytitle, hskip(10em)])
     
     todolist = md"""
             **Things to do:**
@@ -39,8 +37,11 @@ function main(window)
             - Learn in general
             """ 
     
-    all_the_things = vbox([header, todolist])
-    all_the_things |> docpage
-    # logo2
+    todolist = hbox([hskip(4em), todolist, hskip(10em)])
+
+    all_the_things = vbox([header, todolist, vskip(10em)])
+    all_the_things = fillcolor("#FDFBF9", all_the_things)
+    all_the_things
+    # all_the_things |> docpage
 
 end
