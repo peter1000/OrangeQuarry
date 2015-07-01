@@ -5,9 +5,9 @@ using Compose
 logo = compose(compose(context(), rectangle(0, 0, 2, 2)), fill("tomato"))
 # logo = flex(logo)
 
-master = title(4, "Hello")
 
-fig(x) = pad(1em, x)
+
+fig(x) = Escher.pad(1em, x)
 
 docpage(tile; padding=2em, widthcap=62em) = hbox(Escher.pad(4em, tile) |> maxwidth(widthcap), flex())
 
@@ -21,8 +21,7 @@ function main(window)
 
     # box = hbox([hskip(1em), text, hskip(1em), text2])
 
-
-
+    master = title(4, "Hello")
     # master = hbox(logo, box)
 
     typeexample(code, output=eval(parse(code))) =
@@ -36,6 +35,8 @@ function main(window)
        intersperse(vskip(2em),
            map(n -> typeexample("title($n, \"Title $n\")"), 4:-1:1)))
     # logo |> docpage
+
+    master = fig(master)
     master |> docpage
     
 

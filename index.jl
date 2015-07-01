@@ -4,25 +4,20 @@ using Gadfly
 
 padThing(x) = Escher.pad(2em, x)
 
-docpage(tile; padding=2em, widthcap=60em) = hbox(Escher.pad(2em, tile) |> maxwidth(widthcap), Escher.flex())
 
 function main(window)
 
     # mytitle = Escher.title(4, "OrangeQuarry")
     mytitle = title(4, "OrangeQuarry")
-    mytitle = vbox(vskip(2em), mytitle)
-
     rec = rectangle()
 
-    logotest = compose( context(),
-            (context(0, 0, .7, .8), rec, fill("tomato")),
-            (context(.2, .2, .3, .4), rec, fill("tomato")),
-            (context(.3, .3, .1, .1), rec, fill("tomato")),
-            (context(.3, .3, .3, .4), rec, fill("tomato"))
-        )
+    mytitle = vbox(hskip(2em), mytitle)
+    mytitle = vbox(vskip(2em), mytitle)
+
 
     logo = compose(context(0, 0, .75, 1), rec, fill("tomato"))
-    logo = padThing(logo)
+    logo = logo |> padThing
+
 
     header = hbox([logo, hskip(1em), mytitle, hskip(10em)])
     
@@ -38,11 +33,13 @@ function main(window)
             - Learn in general
             """ 
     
-    todolist = hbox([hskip(4em), todolist, hskip(10em)])
+
+    triangle = compose(context(), polygon([(1,1), (0,1), (1/2, 0)]))
+    todolist = hbox([hskip(4em), todolist, hskip(10em), triangle])
 
     all_the_things = vbox([header, todolist, vskip(10em)])
     all_the_things = fillcolor("#FDFBF9", all_the_things)
-    # all_the_things
-    all_the_things |> docpage
+    all_the_things
 
 end
+
