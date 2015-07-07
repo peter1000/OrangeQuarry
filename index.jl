@@ -26,23 +26,14 @@ function main(window)
             - Get to do list better formated 
             - Define layout
             - Get Icon up
-            - Make a titile
+            - Make a titile 
             - Connect to orangequarry.com
             - Figure out how to run on web servers
             - Learn in general
             """ 
     
 
-
-    triangle = compose(
-            context(),
-            circle([0.25, 0.5, 0.75], [0.25, 0.5, 0.75], [0.1, 0.1, 0.1]),
-            fill(LCHab(92, 10, 97))
-            )
-
-    introspect(triangle)
-
-    todolist = hbox([hskip(4em), todolist, hskip(10em), triangle])
+    todolist = hbox([hskip(4em), todolist, hskip(10em)])
 
     all_the_things = vbox([header, todolist, vskip(8em)])
     all_the_things = fillcolor("#FDFBF9", all_the_things)
