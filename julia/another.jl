@@ -34,7 +34,7 @@ function main(window)
     titles = vbox(
        intersperse(vskip(2em),
            map(n -> typeexample("title($n, \"Title $n\")"), 4:-1:1)))
-    # logo |> docpage
+    logo |> docpage
 
     master = fig(master)
     master |> docpage
